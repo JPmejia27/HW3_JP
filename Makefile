@@ -4,7 +4,7 @@ CC=g++
 # 	$(CC) -c problem1A.cpp
 
 problem1A_ex: problem1A.o
-	$(CC) -lrt -fopenmp -o p1A problem1A.cpp
+	$(CC) -lrt -fopenmp -o p1a problem1A.cpp
 
 .PHONY: clean
 
