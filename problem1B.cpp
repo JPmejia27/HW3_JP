@@ -26,10 +26,10 @@ int main(void){
     num_of_points_in_circle=0;
     
     if( clock_gettime(CLOCK_REALTIME, &start) == -1) { perror("clock gettime");}
-#pragma omp parallel shared(data_point,num_of_points_in_circle) private(i) reduction(+: num_of_points_in_circle)
+#pragma omp parallel shared(data_point,num_of_points_in_circle) private(i)
     {
         ////////**********Use OpenMP to parallize this loop***************//
-        #pragma omp sections nowait
+        #pragma omp sections reduction(+: num_of_points_in_circle) nowait
         {
             #pragma omp section
             for(i=0; i<num_of_points/2; i++)
