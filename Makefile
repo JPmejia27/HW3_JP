@@ -1,16 +1,10 @@
 CC=g++
 
-%.o: %.cpp
-	$(CC) -c -o $@ $< $(CFLAGS)
+# problem1A_o: problem1A.cpp
+# 	$(CC) -c problem1A.cpp
 
-# problem1A: problem1A.o
-# 	$(CC) -o problem1A problem1A.o
-#
-# problem1B: problem1B.o
-# 	$(CC) -o problem1B problem1B.o
-
-pa1: p1_serialC++.o
-	$(CC) -o p1_serialC++ p1_serialC++.o
+problem1A_ex: problem1A.o
+	$(CC) -lrt -fopenmp -o p1A problem1A.cpp
 
 .PHONY: clean
 
