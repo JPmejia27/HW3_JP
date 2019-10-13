@@ -15,8 +15,6 @@ int main(void){
     double pi;
     struct timespec start, stop;
     double time;
-    //setting chunk size
-    int chunk = num_of_points/2;
     //setting num of threads
     omp_set_num_threads(2);
     Point* data_point = new Point[num_of_points];
@@ -28,15 +26,29 @@ int main(void){
     num_of_points_in_circle=0;
     
     if( clock_gettime(CLOCK_REALTIME, &start) == -1) { perror("clock gettime");}
-#pragma omp parallel shared(data_point,num_of_points_in_circle,chunk) private(i)
+#pragma omp parallel shared(data_point,num_of_points_in_circle) private(i) reduction(+: num_of_points_in_circle)
     {
         ////////**********Use OpenMP to parallize this loop***************//
-#pragma omp for schedule(static,chunk) reduction(+: num_of_points_in_circle) nowait
-        for(i=0; i<num_of_points; i++){
-            if((data_point[i].x-0.5)*(data_point[i].x-0.5)+(data_point[i].y-0.5)*(data_point[i].y-0.5)<=0.25){
-                num_of_points_in_circle++;
+        #pragma omp sections nowait
+        {
+            #pragma omp section
+            for(i=0; i<num_of_points/2; i++)
+            {
+                if((data_point[i].x-0.5)*(data_point[i].x-0.5)+(data_point[i].y-0.5)*(data_point[i].y-0.5)<=0.25)
+                {
+                    num_of_points_in_circle++;
+                }
+            }
+            #pragma omp section
+            for(i= num_of_points/2; i<num_of_points; i++)
+            {
+                if((data_point[i].x-0.5)*(data_point[i].x-0.5)+(data_point[i].y-0.5)*(data_point[i].y-0.5)<=0.25)
+                {
+                    num_of_points_in_circle++;
+                }
             }
         }
+        
         ///////******************************////
     }
     
