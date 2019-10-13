@@ -55,7 +55,7 @@ int main(void)
         m[i]=size-i;
     }
                                       
-    quickSort(m,0,size -1]);
+    quickSort(m,0,size-1);
                                       
     if( clock_gettime(CLOCK_REALTIME, &start) == -1) { perror("clock gettime");}
     ////////**********Your code goes here***************//
