@@ -16,7 +16,7 @@ int main(void){
     struct timespec start, stop;
     double time;
     //setting chunk size
-    int chunk = num_of_points/4
+    int chunk = num_of_points/4;
     //setting num of threads
     omp_set_num_threads(4);
     Point* data_point = new Point[num_of_points];
