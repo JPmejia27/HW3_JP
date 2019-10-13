@@ -2,16 +2,15 @@
 #include <stdio.h>
 #include <time.h>
 #include <omp.h>
+#include <iostream>
 
 #define        size       16*1024*1024
 
 void swap(int &a,int &b)
 {
-//    std::cout << "A: " << a << " B: " << b << std::endl;
     int x = a;
     a = b;
     b = x;
-//    std::cout << "A: " << a << " B: " << b << std::endl;
 }
 int partition(int array[], int start, int end)
 {
@@ -19,14 +18,16 @@ int partition(int array[], int start, int end)
     int pivot = array[end];
     //index for index of earliest num found that is > pivot that should be swapped with
     int smaller = start - 1;
-    for(int j = 0; j < end; j++)
+    for(int j = start; j < end; j++)
     {
-        if(array[j] <= pivot)
+        if(array[j] < pivot)
         {
             smaller++;
-            swap(array[smaller],array[j);
+            swap(array[smaller],array[j]);
         }
     }
+    swap(array[smaller+1],array[end]);
+    return(smaller + 1);
 }
 void quickSort(int *array, int lo, int hi)
 {
@@ -54,7 +55,7 @@ int main(void)
         m[i]=size-i;
     }
                                       
-    quickSort(m,m[0],m[size -1]);
+    quickSort(m,0,size -1]);
                                       
     if( clock_gettime(CLOCK_REALTIME, &start) == -1) { perror("clock gettime");}
     ////////**********Your code goes here***************//
