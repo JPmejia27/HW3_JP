@@ -7,11 +7,11 @@
 
 void swap(int &a,int &b)
 {
-    std::cout << "A: " << a << " B: " << b << std::endl;
+//    std::cout << "A: " << a << " B: " << b << std::endl;
     int x = a;
     a = b;
     b = x;
-    std::cout << "A: " << a << " B: " << b << std::endl;
+//    std::cout << "A: " << a << " B: " << b << std::endl;
 }
 int partition(int array[], int start, int end)
 {
@@ -28,22 +28,23 @@ int partition(int array[], int start, int end)
         }
     }
 }
-void quickSort(int *array, int start, int end)
+void quickSort(int *array, int lo, int hi)
 {
     // you quick sort function goes here
-    if(low < high)
+    if(lo < hi)
     {
-        int pIndex = partition(array,start,end);
+        int pIndex = partition(array,lo,hi);
         
         //bottom half
-        quickSort(array, start, pIndex-1);
+        quickSort(array, lo, pIndex-1);
         //top half
-        quickSort(array,pIndex+1,end);
+        quickSort(array,pIndex+1,hi);
     }
     
 }
+int main(void)
+  {
 
-int main(void){
     int i, j, tmp;
     struct timespec start, stop;
     double exe_time;
@@ -52,7 +53,9 @@ int main(void){
     for(i=0; i<size; i++){
         m[i]=size-i;
     }
-    
+                                      
+    quickSort(m,m[0],m[size -1]);
+                                      
     if( clock_gettime(CLOCK_REALTIME, &start) == -1) { perror("clock gettime");}
     ////////**********Your code goes here***************//
     
