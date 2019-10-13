@@ -31,7 +31,7 @@ int main(void){
     #pragma omp parallel shared(data_point,num_of_points_in_circle,chunk) private(i)
     {
         ////////**********Use OpenMP to parallize this loop***************//
-    #pragma omp for schedule(static,chunk) Reduction(+: num_of_points_in_circle) nowait
+    #pragma omp for schedule(static,chunk) reduction(+: num_of_points_in_circle) nowait
         for(i=0; i<num_of_points; i++){
             if((data_point[i].x-0.5)*(data_point[i].x-0.5)+(data_point[i].y-0.5)*(data_point[i].y-0.5)<=0.25){
                 num_of_points_in_circle++;
