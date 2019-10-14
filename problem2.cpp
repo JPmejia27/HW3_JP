@@ -6,28 +6,28 @@
 
 #define        size       16 * 1024 * 1024
 
-void swap(int &a,int &b)
+void swap(int *a,int *b)
 {
-    int x = a;
-    a = b;
-    b = x;
+    int x = *a;
+    *a = *b;
+    *b = x;
 }
 int partition(int array[], int start, int end)
 {
     //starting pivot is always at last index
     int pivot = array[end];
     //index for index of earliest num found that is > pivot that should be swapped with
-    int smaller = start - 1;
+    int smaller = start;
     for(int j = start; j < end; j++)
     {
         if(array[j] < pivot)
         {
+            swap(&array[smaller],&array[j]);
             smaller++;
-            swap(array[smaller],array[j]);
         }
     }
-    swap(array[smaller+1],array[end]);
-    return(smaller + 1);
+    swap(array[smaller],array[end]);
+    return(smaller);
 }
 void quickSort(int *array, int lo, int hi)
 {
