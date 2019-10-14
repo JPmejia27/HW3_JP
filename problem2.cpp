@@ -51,6 +51,7 @@ int quickSort(int *a, int start, int end)
 }
 
 int main(void){
+    printf("file changed");
     int i, j, tmp;
     int size = 16*1024*1024;
     struct timespec start, stop;
