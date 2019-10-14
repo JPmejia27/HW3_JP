@@ -11,11 +11,10 @@ void swap(int *a,int *b)
     *a = *b;
     *b = x;
 }
-int partition(int *array, int start, int end)
+int partition(int array[], int start, int end)
 {
-    //starting pivot is random index in pivot
-    int randNum = rand()%size;
-    int pivot = array[randNum];
+    //starting pivot is always at last index
+    int pivot = array[end];
     //index for index of earliest num found that is > pivot that should be swapped with
     int smaller = start;
     for(int j = start; j < end; j++)
@@ -29,21 +28,28 @@ int partition(int *array, int start, int end)
     swap(&array[smaller],&array[end]);
     return(smaller);
 }
-int quickSort(int *array, int lo, int hi)
+int partition_Random(int array[], int start, int end)
+{
+    int randPivot = rand()%size;
+    // Swap A[random] with A[high]
+    swap(arr[randPivot], arr[end]);
+    
+    return partition(arr, start, start);
+}
+void quickSort(int *array, int lo, int hi)
 {
     // you quick sort function goes here
     
     //    printf("Low is %d and high is %d",lo,hi);
     if(lo < hi)
     {
-        int pIndex = partition(array,lo,hi);
+        int pIndex = partition_Random(array,lo,hi);
         
         //bottom half
         quickSort(array, lo, pIndex-1);
         //top half
         quickSort(array,pIndex+1,hi);
     }
-    return 0;
 }
 int main(void)
 {
@@ -64,6 +70,7 @@ int main(void)
     
     ////////**********Your code goes here***************//
     
+
     quickSort(m,0,size-1);
     
     
