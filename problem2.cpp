@@ -2,79 +2,77 @@
 #include <stdio.h>
 #include <time.h>
 #include <omp.h>
-void swap(int *a, int *b)
-{
-    int temp;
-    temp = *a;
-    *a = *b;
-    *b = temp;
-}
+#include <iostream>
 
-int Partition(int *a, int start, int end)
+#define        size       16 * 1024 * 1024
+
+void swap(int *a,int *b)
 {
-    int pivot, index, i;
-    index = start;
-    pivot = end;
-    
-    for(i=start; i < end; i++)
+    int x = *a;
+    *a = *b;
+    *b = x;
+}
+int partition(int array[], int start, int end)
+{
+    //starting pivot is always at last index
+    int pivot = array[end];
+    //index for index of earliest num found that is > pivot that should be swapped with
+    int smaller = start;
+    for(int j = start; j < end; j++)
     {
-        if(a[i] < a[pivot])
+        if(array[j] < pivot)
         {
-            swap(&a[i], &a[index]);
-            index++;
+            swap(&array[smaller],&array[j]);
+            smaller++;
         }
     }
-    
-    swap(&a[pivot], &a[index]);
-    return index;
+    swap(&array[smaller],&array[end]);
+    return(smaller);
 }
-
-int RandomPivotPartition(int *a, int start, int end)
+void quickSort(int *array, int lo, int hi)
 {
-    int pvt, n, temp;
-    n = rand();
-    pvt = start + n%(end-start+1);
-    swap(&a[end], &a[pvt]);
-    return Partition(a, start, end);
-}
-
-int quickSort(int *a, int start, int end)
-{
-    int pindex;
-    if(start < end)
+    // you quick sort function goes here
+    printf("Low is %d and high is %d",lo,hi);
+    if(lo < hi)
     {
-        pindex = RandomPivotPartition(a, start, end);
-        quickSort(a, start, pindex-1);
-        quickSort(a, pindex+1, end);
+        int pIndex = partition(array,lo,hi);
+        
+        //bottom half
+        quickSort(array, lo, pIndex-1);
+        //top half
+        quickSort(array,pIndex+1,hi);
     }
     return 0;
 }
+int main(void)
+  {
 
-int main(void){
     int i, j, tmp;
-    omp_set_num_threads(2);
-    int size = 16*1024*1024;
     struct timespec start, stop;
     double exe_time;
     srand(time(NULL));
-    int * m = new int[size];
+    int* m = new int[size];
     for(i=0; i<size; i++){
         m[i]=size-i;
     }
-    
+      
+
+    for(i=0;i<10;i++) printf("%d ", m[i]);
+      
     if( clock_gettime(CLOCK_REALTIME, &start) == -1) { perror("clock gettime");}
+   
     ////////**********Your code goes here***************//
+      
     quickSort(m,0,size-1);
+    
+    
+    
     ///////******************************////
     
     if( clock_gettime( CLOCK_REALTIME, &stop) == -1 ) { perror("clock gettime");}
     exe_time = (stop.tv_sec - start.tv_sec)+ (double)(stop.tv_nsec - start.tv_nsec)/1e9;
     
     for(i=0;i<16;i++) printf("%d ", m[i]);
-    // printf("%d\n ", m[0]);
-    // printf("%d\n ", m[size/2 - 1]);
-    // printf("%d\n ", m[size/2]);
-    // printf("%d\n ", m[size -1]);
+//    for(i=0;i<10;i++) printf("%d ", m[i]);
     printf("\nExecution time = %f sec\n",  exe_time);
 }
-
