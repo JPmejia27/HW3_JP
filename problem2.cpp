@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <time.h>
 #include <omp.h>
-#include <iostream>
 
 #define        size       16 * 1024 * 1024
 
@@ -12,7 +11,7 @@ void swap(int *a,int *b)
     *a = *b;
     *b = x;
 }
-int partition(int array[], int start, int end)
+int partition(int *array, int start, int end)
 {
     //starting pivot is always at last index
     int pivot = array[end];
@@ -29,7 +28,7 @@ int partition(int array[], int start, int end)
     swap(&array[smaller],&array[end]);
     return(smaller);
 }
-void quickSort(int *array, int lo, int hi)
+int quickSort(int *array, int lo, int hi)
 {
     // you quick sort function goes here
     printf("Low is %d and high is %d",lo,hi);
