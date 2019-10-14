@@ -64,6 +64,7 @@ int main(void){
     
     if( clock_gettime(CLOCK_REALTIME, &start) == -1) { perror("clock gettime");}
     ////////**********Your code goes here***************//
+    //chNged
     quickSort(m,0,size-1);
     ///////******************************////
     
