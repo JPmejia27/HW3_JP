@@ -31,7 +31,7 @@ int partition(int array[], int start, int end)
 int partition_Random(int array[], int start, int end)
 {
     int randPivot = rand()%size;
-    swap(array[randPivot], array[end]);
+    swap(&array[randPivot],&array[end]);
     
     return partition(array, start, end);
 }
