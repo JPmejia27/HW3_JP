@@ -31,7 +31,7 @@ int partition(int *array, int start, int end)
 int quickSort(int *array, int lo, int hi)
 {
     // you quick sort function goes here
-    printf("Low is %d and high is %d",lo,hi);
+//    printf("Low is %d and high is %d",lo,hi);
     if(lo < hi)
     {
         int pIndex = partition(array,lo,hi);
