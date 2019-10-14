@@ -73,7 +73,7 @@ int main(void)
     int pivotIndex = partition_Random(m,0,size -1);
     //creting threads:
     omp_set_num_threads(2);
-    #pragma omp parallel shared(size,m)
+    #pragma omp parallel shared(m)
     {
         #pragma omp sections nowait
         {
