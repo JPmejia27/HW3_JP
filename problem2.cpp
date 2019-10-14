@@ -4,7 +4,7 @@
 #include <omp.h>
 #include <iostream>
 
-#define        size       10
+#define        size       16 * 1024 * 1024
 
 void swap(int &a,int &b)
 {
@@ -41,7 +41,7 @@ void quickSort(int *array, int lo, int hi)
         //top half
         quickSort(array,pIndex+1,hi);
     }
-    
+    printf("does this ever finish");
 }
 int main(void)
   {
@@ -70,7 +70,7 @@ int main(void)
     if( clock_gettime( CLOCK_REALTIME, &stop) == -1 ) { perror("clock gettime");}
     exe_time = (stop.tv_sec - start.tv_sec)+ (double)(stop.tv_nsec - start.tv_nsec)/1e9;
     
-//    for(i=0;i<16;i++) printf("%d ", m[i]);
-    for(i=0;i<10;i++) printf("%d ", m[i]);
+    for(i=0;i<16;i++) printf("%d ", m[i]);
+//    for(i=0;i<10;i++) printf("%d ", m[i]);
     printf("\nExecution time = %f sec\n",  exe_time);
 }
