@@ -4,7 +4,7 @@
 #include <omp.h>
 #include <iostream>
 
-#define        size       16 * 1024 * 1024
+//#define        size       16 * 1024 * 1024
 
 void swap(int *a,int *b)
 {
@@ -31,11 +31,12 @@ int partition(int array[], int start, int end)
 }
 void quickSort(int *array, int lo, int hi)
 {
+    int pIndex;
     // you quick sort function goes here
     printf("Low is %d and high is %d",lo,hi);
     if(lo < hi)
     {
-        int pIndex = partition(array,lo,hi);
+        pIndex = partition(array,lo,hi);
         
         //bottom half
         quickSort(array, lo, pIndex-1);
@@ -47,6 +48,7 @@ int main(void)
   {
 
     int i, j, tmp;
+    int size = 16*1024*1024;
     struct timespec start, stop;
     double exe_time;
     srand(time(NULL));
