@@ -15,7 +15,7 @@ void swap(int &a,int &b)
 int partition(int array[], int start, int end)
 {
     //starting pivot is always at last index
-    int pivot = x = array[rand()%size];
+    int pivot = array[rand()%size];
     //index for index of earliest num found that is > pivot that should be swapped with
     int smaller = start - 1;
     for(int j = start; j < end; j++)
