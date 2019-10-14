@@ -30,12 +30,12 @@ int partition(int array[], int start, int end)
 }
 int partition_Random(int array[], int start, int end)
 {
-    int randPivot = rand()%size;
+    int randPivot = start + rand()%(end - start + 1);
     swap(&array[randPivot],&array[end]);
     
-    return partition(array, start, end);
+    return (partition(array, start, end));
 }
-void quickSort(int *array, int lo, int hi)
+int quickSort(int array[], int lo, int hi)
 {
     // you quick sort function goes here
     
@@ -49,6 +49,8 @@ void quickSort(int *array, int lo, int hi)
         //top half
         quickSort(array,pIndex+1,hi);
     }
+    
+    return(0);
 }
 int main(void)
 {
@@ -63,14 +65,29 @@ int main(void)
     }
     
     
-    for(i=0;i<10;i++) printf("%d ", m[i]);
     
     if( clock_gettime(CLOCK_REALTIME, &start) == -1) { perror("clock gettime");}
     
     ////////**********Your code goes here***************//
-    
-
-    quickSort(m,0,size-1);
+    //first pivot
+    int pivotIndex = partition_Random(m,0,size -1);
+    //creting threads:
+    omp_set_num_threads(2);
+    #pragma omp parallel shared(size,m)
+    {
+        #pragma omp sections nowait
+        {
+            #pragma omp section
+            {
+                quickSort(m,0,pivotIndex-1);
+            
+            }
+            #pragma omp section
+            {
+                quickSort(m,pivotIndex+1,size -1);
+            }
+            
+        }
     
     
     
