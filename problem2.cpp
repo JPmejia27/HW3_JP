@@ -43,7 +43,7 @@ int quickSort(int *a, int start, int end)
     int pindex;
     if(start < end)
     {
-        pindex = RandomPivotPartition(a, start, end);
+        pindex = Partition(a, start, end);
         quickSort(a, start, pindex-1);
         quickSort(a, pindex+1, end);
     }
