@@ -31,10 +31,9 @@ int partition(int array[], int start, int end)
 int partition_Random(int array[], int start, int end)
 {
     int randPivot = rand()%size;
-    // Swap A[random] with A[high]
-    swap(arr[randPivot], arr[end]);
+    swap(array[randPivot], array[end]);
     
-    return partition(arr, start, start);
+    return partition(array, start, end);
 }
 void quickSort(int *array, int lo, int hi)
 {
