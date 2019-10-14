@@ -12,7 +12,7 @@ problem1B_ex: problem1B.o
 	$(CC) -lrt -fopenmp -o p1b problem1B.cpp
 
 problem2_ex: problem2.o
-	$(CC) -lrt -fopenmp -o p2 problem2.cpp
+	$(CC) -o p2 problem2.cpp
 
 problem2B_ex: problem2B.o
 	$(CC) -lrt -fopenmp -o p2b problem2B.cpp
