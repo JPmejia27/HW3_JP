@@ -54,12 +54,11 @@ int main(void)
     for(i=0; i<size; i++){
         m[i]=size-i;
     }
-                                      
-    quickSort(m,0,size-1);
+      
                                       
     if( clock_gettime(CLOCK_REALTIME, &start) == -1) { perror("clock gettime");}
     ////////**********Your code goes here***************//
-    
+    quickSort(m,0,size-1);
     
     
     ///////******************************////
