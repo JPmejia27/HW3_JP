@@ -52,7 +52,6 @@ int quickSort(int *a, int start, int end)
 
 int main(void){
     int i, j, tmp;
-    omp_set_num_threads(2);
     int size = 16*1024*1024;
     struct timespec start, stop;
     double exe_time;
