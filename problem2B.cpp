@@ -35,7 +35,7 @@ int quickSort(int *array, int lo, int hi)
     //    printf("Low is %d and high is %d",lo,hi);
     if(lo < hi)
     {
-        pIndex = partition(array,lo,hi);
+        int pIndex = partition(array,lo,hi);
         
         //bottom half
         quickSort(array, lo, pIndex-1);
