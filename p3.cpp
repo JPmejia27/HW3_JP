@@ -83,7 +83,7 @@ int main(int argc, char** argv)
     
     //c:
 //    ifstream input(input_file, ios::binary);
-//    input.read((char*) &a[0], a.size());
+//    input.read((char*) &a[0], h*w);
 //    input.close()
     
        printf("sup");
