@@ -14,6 +14,8 @@ problem1B_ex: problem1B.o
 problem2_ex: problem2.o
 	$(CC) -lrt -fopenmp -o p2 problem2.cpp
 
+problem3_ex: p3.o
+	$(CC) -lrt -fopenmp -o p3 p3.cpp
 
 .PHONY: clean
 
